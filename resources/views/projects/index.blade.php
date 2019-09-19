@@ -2,9 +2,9 @@
 
 @section('content')
     <h1 class="title">Projects</h1>
-    <ul>
+    <ul style="list-style-type:square;">
         @foreach($projects as $project)
-        <li>{{$project->title}}</li>
+        <li><a href="/projects/{{$project->id}}">{{$project->title}}</a></li>
         @endforeach
     </ul>
 @endsection('content')
