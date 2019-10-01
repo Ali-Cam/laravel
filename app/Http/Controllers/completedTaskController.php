@@ -9,7 +9,7 @@ class completedTaskController extends Controller
     public function store(Task $task){
         $task->complete();
 
-        return redirect('/projects'. $task->project->id);
+        return redirect('/projects/'. $task->project->id);
     }
 
     public function destroy(Task $task){
