@@ -13,8 +13,10 @@
     @if($project->tasks->count())
     <div style="margin-top:1em;" class="box">
         @foreach($project->tasks as $task)
-        <form action="/tasks/{{$task->id}}" method="post">
-            @method('PATCH')
+        <form action="/completed-task/{{$task->id}}" method="post">
+            @if($task->completed)
+            @method('delete')
+            @endif
             @csrf
             <label for="completed" class="checkbox {{$task->completed?'is-checked':''}}">
                 <input type="checkbox" name="completed" onChange="this.form.submit()" {{$task->completed?"checked":""}}>
@@ -26,11 +28,12 @@
     @endif
 
     <div class="box">
-        <form action="">
+        <form action="/projects/{{$project->id}}/tasks" method='post'>
+        @csrf
             <div class="field">
                 <label for="body" class="label">Task</label>
                 <div class="control">
-                    <input type="text" class="input" name="body" >
+                    <input type="text" class="input {{$errors->has('title')? 'is-danger':''}}" name="body" placeholder='task' value="{{old('body')}}" >
                 </div>
             </div>
             <div class="field">
@@ -40,6 +43,7 @@
             </div>
         </form>
     </div>
+    @include('error')
 </div>
 
 @endsection

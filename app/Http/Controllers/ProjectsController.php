@@ -18,8 +18,8 @@ class ProjectsController extends Controller
 
     public function store(){
         $validated = request()->validate([
-            'title' => ['required', 'min:3'],
-            'description' => ['required', 'min:4']
+            'description' => ['required', 'min:4'],
+            'title' => ['required', 'min:3']
         ]);
         Project::create(
             $validated
